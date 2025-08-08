@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHUTOSH RANJAN - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables for easy theme switching */
+        :root {
+            --bg-light: #ffffff; /* Changed to white */
+            --bg-dark: #1a1a2e; /* Darker background for dark mode - unchanged */
+            --text-light: #333333; /* Dark text for readability on white */
+            --text-dark: #e0e0e0; /* Lighter text for dark mode - unchanged */
+            --primary: #FF4500; /* Primary red-orange */
+            --primary-dark: #CC3700; /* Darker red-orange for hover */
+            --secondary-accent: #808080; /* A neutral grey for accents */
+            --card-light: #ffffff; /* White for project cards */
+            --card-dark: #3a3a50; /* Darker blue for dark mode cards - unchanged */
+            --card-border-light: #f0f0f0; /* Light border for cards */
+            --card-border-dark: #505068; /* unchanged */
+            --input-bg-light: #ffffff; /* White for input backgrounds */
+            --input-bg-dark: #3b3b55; /* unchanged */
+            --input-border-light: #cccccc; /* Light grey for input borders */
+            --input-border-dark: #555570; /* unchanged */
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.3);
+            --section-bg-light: #ffffff; /* White for section backgrounds */
+            --section-bg-dark: #2b2b40; /* unchanged */
+        }
+
+        /* Base styles */
+        html {
+            scroll-behavior: smooth; /* Smooth scrolling for navigation links */
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.6s ease, color 0.6s ease;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        /* Header styling */
+        header {
+            background: #000;
+            color: white;
+            padding: 60px 0; /* Increased padding for more space */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(0,0,0,0.6));
+            z-index: 0;
+            animation: headerGradient 15s ease infinite alternate; /* Subtle gradient animation */
+        }
+
+        @keyframes headerGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        header h1 {
+            margin: 0;
+            /* Fluid font size for h1 */
+            font-size: clamp(2.5em, 8vw, 3.8em);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; /* Increased gap */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        header h1 .fa-solid {
+            font-size: 0.8em;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        header h1 .fa-solid:hover {
+            transform: scale(1.1) rotate(5deg); /* Icon hover effect */
+        }
+
+        header p {
+            /* Fluid font size for p */
+            font-size: clamp(1em, 3vw, 1.3em);
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        /* Typing effect for header profession */
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .05em;
+            animation: typing 3.5s steps(40, end) forwards, blink-caret .75s step-end infinite;
+            display: inline-block;
+            border-right: .15em solid var(--primary); /* Typing cursor */
+            max-width: 100%; /* Ensure it doesn't overflow */
+        }
+
+        /* The typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary); }
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: #222;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            display: flex; /* Use flexbox for desktop and mobile alignment */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        nav .menu-toggle {
+            display: none; /* Hidden by default on larger screens */
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: color 0.3s ease;
+        }
+
+        nav .menu-toggle:hover {
+            color: var(--primary);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Default to flex for larger screens */
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%; /* Take full width */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Section styling */
+        section {
+            padding: 40px; /* Increased padding */
+            max-width: 900px;
+            margin: 40px auto; /* Increased margin */
+            background: var(--section-bg-light);
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 8px 25px var(--shadow-light); /* Deeper shadow */
+            transition: background 0.6s ease, box-shadow 0.6s ease, transform 0.3s ease;
+            opacity: 0; /* Hidden by default for fade-in animation */
+            transform: translateY(20px); /* Slightly moved down for slide-up */
+            animation: none; /* Will be controlled by JS */
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.dark-mode section {
+            background: var(--section-bg-dark);
+            box-shadow: 0 8px 25px var(--shadow-dark);
+        }
+
+        /* Neon effect for sections on hover */
+        section:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15), /* Existing shadow, slightly adjusted */
+                        0 0 8px var(--primary), /* Neon glow layer 1 (reduced from 10px) */
+                        0 0 15px var(--primary); /* Neon glow layer 2 (reduced from 20px) */
+            border-color: var(--primary); /* Highlight border */
+        }
+        body.dark-mode section:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4),
+                        0 0 8px var(--primary),
+                        0 0 15px var(--primary);
+        }
+
+        /* Headings */
+        h1, h2 {
+            margin: 0 0 20px; /* More margin below headings */
+            color: var(--primary);
+            font-weight: 700; /* Bolder headings */
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Increased gap */
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--secondary-accent);
+            padding-bottom: 12px; /* More padding below border */
+            margin-bottom: 30px; /* More margin below border */
+        }
+
+        /* List styling */
+        ul, ol {
+            padding-left: 30px; /* More padding */
+            list-style-type: none;
+        }
+
+        /* Fix for ordered list numbering */
+        ol {
+            counter-reset: item; /* Reset the counter for each ordered list */
+        }
+
+        ul li::before {
+            content: "\2022"; /* Unicode bullet */
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1.2em; /* Adjusted width */
+            margin-left: -1.2em;
+        }
+
+        ol li::before {
+            content: counter(item) ".";
+            counter-increment: item;
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1.8em; /* Adjusted width */
+            margin-left: -1.8em;
+            text-align: right; /* Align numbers to the right */
+            padding-right: 5px;
+        }
+
+        ul li, ol li {
+            margin-bottom: 10px; /* More space between list items */
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        ul li:hover, ol li:hover {
+            background-color: rgba(255, 69, 0, 0.05); /* Subtle highlight on hover using primary color */
+            border-radius: 5px;
+        }
+        body.dark-mode ul li:hover, body.dark-mode ol li:hover {
+            background-color: rgba(0, 123, 255, 0.15);
+        }
+
+        ul li i, ol li i {
+            margin-right: 12px; /* More space for icons */
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        /* Link styling */
+        a {
+            color: var(--primary);
+            text-decoration: none; /* Default to no underline for all links */
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+            font-weight: 500;
+        }
+
+        /* Specific styling for skill and interest links */
+        .skill-link, .interest-link {
+            color: var(--text-light); /* Black for light mode */
+        }
+
+        body.dark-mode .skill-link, body.dark-mode .interest-link {
+            color: var(--text-dark); /* White for dark mode */
+        }
+
+        /* General hover effect for links (if not a project card link) */
+        a:not(.project-card-link):hover {
+            text-decoration: underline; /* Only underline non-project card links */
+            color: var(--primary-dark);
+        }
+
+        /* Project and Card styling */
+        .project, .card {
+            margin-bottom: 25px; /* More space below cards */
+            background: var(--card-light);
+            border: 1px solid var(--card-border-light);
+            border-radius: 12px; /* More rounded */
+            padding: 25px; /* More padding */
+            transition: all 0.4s ease; /* Smoother transition */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Deeper shadow */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden; /* For potential internal effects */
+            cursor: pointer; /* Indicate clickable */
+        }
+
+        body.dark-mode .project, body.dark-mode .card {
+            background: var(--card-dark);
+            border-color: var(--card-border-dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+
+        .project:hover, .card:hover {
+            transform: translateY(-8px); /* More pronounced lift */
+            /* Blurry neon red-orange effect for cards */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2), /* Existing shadow */
+                        0 0 5px var(--primary), /* Neon glow layer 1 (reduced from 8px) */
+                        0 0 10px var(--primary); /* Neon glow layer 2 (reduced from 15px) */
+            border-color: var(--primary); /* Highlight border on hover */
+        }
+        body.dark-mode .project:hover, body.dark-mode .card:hover {
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4),
+                        0 0 5px var(--primary),
+                        0 0 10px var(--primary);
+        }
+
+        .project h3 {
+            margin-top: 0;
+            color: var(--text-light); /* Changed to use text-light */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em; /* Larger project titles */
+        }
+
+        /* Set icon color within project h3 to primary theme color */
+        .project h3 i {
+            color: var(--primary);
+        }
+
+        body.dark-mode .project h3 {
+            color: var(--text-dark);
+        }
+
+        /* Styling for project descriptions */
+        .project p {
+            color: black; /* Set description text color to black */
+        }
+        body.dark-mode .project p {
+            color: var(--text-dark); /* Keep original text color for dark mode */
+        }
+
+        /* Project card link specific styling */
+        .project-card-link {
+            display: block; /* Make the link take up the full width of the card */
+            color: inherit; /* Inherit color from parent (body or section) */
+            text-decoration: none; /* Ensure no underline by default */
+        }
+
+        /* Ensure text inside project cards does not get underlined on hover */
+        .project-card-link:hover .project h3,
+        .project-card-link:hover .project p,
+        .project-card-link:hover .project small {
+            text-decoration: none; /* Explicitly remove underline for text inside the hovered project card */
+        }
+
+        /* Ensure text inside project cards maintains its color on hover */
+        .project-card-link:hover .project h3 {
+            color: var(--text-light); /* Keep original text color for light mode */
+        }
+        body.dark-mode .project-card-link:hover .project h3 {
+            color: var(--text-dark); /* Keep original text color for dark mode */
+        }
+
+        .project-card-link:hover .project p {
+            color: black; /* Keep original text color for light mode */
+        }
+        body.dark-mode .project-card-link:hover .project p {
+            color: var(--text-dark); /* Keep original text color for dark mode */
+        }
+
+        /* Also for small tags if they are part of the main text flow and should not change color */
+        .project-card-link:hover .project small {
+            color: var(--secondary-accent); /* Keep original color */
+        }
+
+
+        .project small {
+            font-size: 0.9em;
+            color: var(--secondary-accent);
+            margin-left: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .project small i {
+            color: orange; /* Icon color for "updating soon" */
+        }
+
+        .card {
+            background: var(--card-light); /* Changed to use card-light */
+            border: 1px solid var(--card-border-light); /* Changed to use card-border-light */
+        }
+
+        body.dark-mode .card {
+            background: var(--card-dark);
+            border-color: var(--card-border-dark);
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 25px; /* More padding */
+            background: #111;
+            color: white;
+            font-size: 0.95em;
+            margin-top: 40px; /* More margin */
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* More space between form elements */
+            margin-top: 25px;
+        }
+
+        label {
+            font-weight: 600; /* Bolder labels */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* More space for icons */
+            color: var(--text-light);
+            font-size: 1.05em;
+        }
+
+        /* Set icon color within labels to primary theme color */
+        label i {
+            color: var(--primary);
+        }
+
+        body.dark-mode label {
+            color: var(--text-dark);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            padding: 14px 18px; /* More padding */
+            border: 1px solid var(--input-border-light);
+            border-radius: 8px;
+            font-size: 1.05rem;
+            transition: border 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            width: calc(100% - 36px); /* Adjust for padding and border */
+            box-sizing: border-box;
+            background-color: var(--input-bg-light);
+            color: var(--text-light);
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="email"],
+        body.dark-mode input[type="password"],
+        body.dark-mode input[type="date"],
+        body.dark-mode select {
+            background-color: var(--input-bg-dark);
+            border-color: var(--input-border-dark);
+            color: var(--text-dark);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.4); /* Larger shadow on focus using primary color */
+            outline: none;
+            background-color: #fffaf0; /* Light focus background to complement red-orange */
+        }
+
+        body.dark-mode input:focus, body.dark-mode select:focus {
+            background-color: #4c4c6a;
+        }
+
+        .tooltip {
+            font-size: 0.85em;
+            color: var(--secondary-accent);
+            margin-left: 8px;
+        }
+
+        .gender-options {
+            display: flex;
+            gap: 25px; /* More space between radio buttons */
+            margin-top: 5px;
+        }
+
+        .gender-options label {
+            font-weight: normal;
+            font-size: 1em;
+        }
+
+        .checkbox {
+            display: flex;
+            gap: 12px; /* More space */
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 0; /* Remove default margin */
+            transform: scale(1.2); /* Slightly larger checkbox */
+            accent-color: var(--primary); /* Color the checkbox */
+        }
+
+        /* Password strength bar */
+        #strengthBarContainer {
+            height: 10px; /* Taller bar */
+            border-radius: 5px;
+            margin-top: 12px;
+            background-color: #e0e0e0; /* Default background to make the track visible */
+            overflow: hidden; /* Ensures the fill stays within the rounded corners */
+        }
+
+        body.dark-mode #strengthBarContainer {
+            background-color: #555555; /* Darker track for dark mode */
+        }
+
+        #strengthFill {
+            height: 100%; /* Fill the container height */
+            width: 0%; /* Start at 0% fill */
+            border-radius: 5px; /* Match container border-radius */
+            transition: width 0.6s ease, background-color 0.6s ease; /* Animate width and color */
+        }
+
+        .strength.weak { background: #ff4d4d; }
+        .strength.medium { background: #ffd700; }
+        .strength.strong { background: #32cd32; }
+
+        /* Password visibility toggle */
+        .password-input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-input-container input[type="password"],
+        .password-input-container input[type="text"] {
+            width: calc(100% - 36px - 40px); /* Adjust for padding, border, and icon */
+            padding-right: 50px; /* Make space for the icon */
+        }
+
+        .toggle-password-visibility {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--secondary-accent);
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-password-visibility:hover {
+            color: var(--primary);
+        }
+
+        /* Password match status */
+        .password-match-status {
+            font-size: 0.9em;
+            margin-top: 5px;
+            font-weight: 500;
+            min-height: 1.2em; /* Reserve space to prevent layout shift */
+        }
+
+        .password-match-status.match {
+            color: #32cd32; /* Green for match */
+        }
+
+        .password-match-status.no-match {
+            color: #dc3545; /* Red for no match */
+        }
+
+        /* Button styling */
+        button {
+            padding: 14px 30px; /* More padding */
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.15em; /* Larger font */
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            margin-top: 20px; /* More margin */
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2); /* Shadow using primary color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-3px); /* More pronounced lift */
+            background: var(--primary-dark);
+            /* Blurry neon red-orange effect for buttons */
+            box-shadow: 0 0 3px var(--primary), /* Reduced from 5px */
+                        0 0 6px var(--primary), /* Reduced from 10px */
+                        0 0 9px var(--primary); /* Reduced from 15px */
+        }
+
+        /* Dark/Light mode toggle button */
+        .toggle-mode {
+            position: fixed;
+            top: 25px; /* Adjusted position */
+            right: 25px; /* Adjusted position */
+            cursor: pointer;
+            background: #444;
+            color: white;
+            padding: 12px 18px; /* More padding */
+            border-radius: 30px; /* More rounded */
+            font-size: 16px; /* Larger font */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* More space */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-mode .toggle-mode {
+            background: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+        }
+
+        .toggle-mode:hover {
+            transform: scale(1.08); /* More pronounced scale */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3),
+                        0 0 5px var(--primary), /* Neon glow layer 1 (reduced from 8px) */
+                        0 0 10px var(--primary); /* Neon glow layer 2 (reduced from 15px) */
+        }
+        body.dark-mode .toggle-mode:hover {
+            box-shadow: 0 6px 20px rgba(0,123,255,0.5),
+                        0 0 5px var(--primary),
+                        0 0 10px var(--primary);
+        }
+
+        /* Contact info styling */
+        .contact-info {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center horizontally */
+            gap: 15px; /* Space between items */
+            padding: 10px 0; /* Add some vertical padding */
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* More space */
+            margin-bottom: 0; /* Remove default paragraph margin */
+            font-size: 1.05em;
+        }
+
+        .contact-info a {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* More space */
+            font-weight: 500;
+        }
+
+        .contact-info a i {
+            font-size: 1.3em; /* Larger icons */
+            color: var(--primary);
+            transition: transform 0.2s ease;
+        }
+        .contact-info a:hover i {
+            transform: translateY(-2px); /* Icon lift on hover */
+        }
+
+        /* Custom Modal for alerts */
+        .custom-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1001; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .custom-modal-content {
+            background-color: var(--bg-light);
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+        body.dark-mode .custom-modal-content {
+            background-color: var(--section-bg-dark);
+            color: var(--text-dark);
+        }
+
+        .custom-modal-content h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .custom-modal-content p {
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .custom-modal-content button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-modal-content button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 24px;
+            border: none;
+            outline: none;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.4); /* Shadow using primary color */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            /* Blurry neon red-orange effect for scroll to top button */
+            box-shadow: 0 0 3px var(--primary), /* Reduced from 5px */
+                        0 0 6px var(--primary), /* Reduced from 10px */
+                        0 0 9px var(--primary); /* Reduced from 15px */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: clamp(2em, 6vw, 2.8em); /* Adjusted clamp for smaller screens */
+                gap: 10px;
+            }
+            header p {
+                font-size: clamp(0.9em, 2.5vw, 1.1em); /* Adjusted clamp for smaller screens */
+            }
+            section {
+                margin: 20px;
+                padding: 25px;
+            }
+            nav {
+                justify-content: space-between; /* Space out toggle button and potentially a logo */
+                padding: 10px 20px; /* Adjust padding for mobile */
+            }
+            nav .menu-toggle {
+                display: block; /* Show menu toggle on small screens */
+            }
+            nav ul {
+                display: none; /* Hide navigation links by default on small screens */
+                flex-direction: column; /* Stack links vertically */
+                position: absolute; /* Position relative to nav */
+                top: 100%; /* Below the nav bar */
+                left: 0;
+                background: #222; /* Same background as nav */
+                width: 100%;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+                padding: 10px 0;
+                border-top: 1px solid rgba(255,255,255,0.1);
+                max-height: 0; /* Start collapsed */
+                overflow: hidden; /* Hide overflow content */
+                transition: max-height 0.3s ease-out; /* Animate height */
+            }
+            nav ul.nav-open {
+                display: flex; /* Show when open */
+                max-height: 300px; /* A value larger than the actual height of the menu items */
+            }
+            nav ul li {
+                margin: 10px 0; /* Adjust vertical margin for stacked items */
+            }
+            nav ul li a {
+                display: block; /* Make links block level for full clickable area */
+                padding: 10px 20px; /* Add padding to links */
+            }
+            .toggle-mode {
+                top: 15px;
+                right: 15px;
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="date"],
+            select {
+                width: calc(100% - 30px);
+                padding: 12px 15px;
+            }
+            button {
+                padding: 12px 20px;
+                font-size: 1.05em;
+            }
+            #scrollToTopBtn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px;
+                font-size: 20px;
+            }
+            .contact-info {
+                gap: 10px; /* Adjust gap for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: clamp(1.8em, 5vw, 2em); /* Further adjusted clamp for very small screens */
+                flex-direction: column;
+                gap: 5px;
+            }
+            header h1 .fa-solid {
+                font-size: 0.7em;
+            }
+            header p {
+                font-size: clamp(0.8em, 2vw, 1em); /* Further adjusted clamp for very small screens */
+            }
+            .typing-effect {
+                white-space: normal; /* Allow text to wrap on small screens */
+                border-right: none; /* Hide blinking cursor if text wraps */
+                animation: none; /* Disable typing animation on small screens */
+            }
+            section {
+                margin: 15px;
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .project, .card {
+                padding: 20px;
+            }
+            .project h3 {
+                font-size: 1.3em;
+            }
+            .gender-options {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .custom-modal-content {
+                width: 90%;
+                padding: 20px;
+            }
+            nav ul {
+                flex-direction: column; /* Stack navigation items vertically */
+                align-items: center;
+            }
+            nav ul li {
+                margin: 5px 0; /* Adjust vertical margin */
+            }
+
+            /* File input wrapper for very small screens */
+            .file-input-wrapper {
+                flex-direction: column; /* Stack items vertically */
+                align-items: flex-start; /* Align items to the left when stacked */
+            }
+
+            .custom-file-input-button {
+                width: 100%; /* Take full width when stacked */
+            }
+
+            .profile-preview-controls {
+                align-self: flex-start; /* Align to the left when stacked */
+                margin-top: 10px; /* Add some space above the controls when stacked */
+            }
+        }
+
+        /* Styles for file input and image preview */
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            /* Hide the default file input */
+            display: none;
+        }
+
+        /* Style for the custom file input button */
+        .custom-file-input-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px; /* Adjusted padding for a good button size */
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1em; /* Adjusted font size */
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            flex-grow: 1; /* Allow it to grow */
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.2);
+        }
+
+        .custom-file-input-button:hover {
+            transform: translateY(-2px);
+            background: var(--primary-dark);
+            box-shadow: 0 0 3px var(--primary),
+                        0 0 6px var(--primary),
+                        0 0 9px var(--primary);
+        }
+
+        .custom-file-input-button i {
+            margin-right: 8px; /* Space between icon and text */
+        }
+
+        body.dark-mode .custom-file-input-button {
+            background: var(--primary); /* Keep primary color for dark mode */
+            box-shadow: 0 4px 10px rgba(255, 69, 0, 0.3);
+        }
+
+        body.dark-mode .custom-file-input-button:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 0 3px var(--primary),
+                        0 0 6px var(--primary),
+                        0 0 9px var(--primary);
+        }
+
+        .profile-preview-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the image and button horizontally */
+            gap: 5px; /* Small gap between image and button */
+            flex-shrink: 0; /* Prevent it from shrinking */
+        }
+
+        .profile-picture-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            display: none; /* Hidden by default */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .profile-picture-preview:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        /* Style for the remove file button */
+        .remove-file-button {
+            padding: 8px 15px; /* Smaller padding for a more compact button */
+            background: #dc3545; /* A standard red for delete action */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 0.9em; /* Smaller font size */
+            font-weight: 500;
+            margin-top: 10px; /* Space above the button */
+            align-self: flex-start; /* Align to the start of the flex container */
+            display: none; /* Hidden by default, shown when an image is loaded */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: fit-content; /* Adjust width to content */
+        }
+
+        .remove-file-button i {
+            margin-right: 5px; /* Space between icon and text */
+        }
+
+        .remove-file-button:hover {
+            background-color: #c82333; /* Darker red on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Enlarged preview modal */
+        .enlarged-preview-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+
+            display: none; /* Start hidden, will be set to flex by JS */
+            opacity: 0;
+            pointer-events: none; /* Prevent clicks when invisible */
+            transition: opacity 0.3s ease-out;
+        }
+
+        .enlarged-preview-modal.active {
+            opacity: 1;
+            pointer-events: auto; /* Allow clicks when visible */
+            display: flex; /* Ensure it's displayed when active */
+        }
+
+        .enlarged-preview-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.7); /* Neon glow for enlarged preview */
+            transform: scale(0.8); /* Initial smaller size for animation */
+            transition: transform 0.3s ease-out;
+        }
+
+        .enlarged-preview-modal.active .enlarged-preview-content {
+            transform: scale(1); /* Enlarge to full size */
+        }
+
+        /* Specific style for the About Me icon to ensure consistent sizing and appearance */
+        #aboutMeIcon {
+            /* For Font Awesome icon (<i>) */
+            font-size: 1.5em; /* This will control the size of the Font Awesome icon */
+            color: var(--primary); /* Keep the theme color */
+
+            /* For image replacement (<img>) - these will apply directly to the img */
+            width: 1.5em; /* Match the font-size for consistent sizing */
+            height: 1.5em; /* Match the font-size for consistent sizing */
+            border-radius: 50%; /* Make it circular */
+            object-fit: cover; /* Ensure image fills the circle without distortion */
+            vertical-align: middle; /* Helps with vertical alignment within the h2 flex container */
+            flex-shrink: 0; /* Prevent image from shrinking in flex container */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <div class="toggle-mode" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> <span>Toggle Mode</span>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <h1><i class="fas fa-code"></i> ASHUTOSH RANJAN <i class="fas fa-laptop-code"></i></h1>
+        <p><span class="typing-effect">Web Developer | Designer | Student</span></p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul>
+            <li><a href="#about-me">About Me</a></li>
+            <li><a href="#skills-interests">Skills & Interests</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#registration-form">Register</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Me Section -->
+    <section id="about-me">
+        <h2><i id="aboutMeIcon" class="fas fa-user-circle"></i> About Me</h2>
+        <p>
+            I am a motivated and creative web developer with a passion for design and technology.
+            Currently pursuing a degree in <mark>B. Tech. Information Technology</mark>, I enjoy building interactive and clean websites.
+            I love learning new tools and solving real-world problems through coding.
+        </p>
+    </section>
+
+    <!-- Skills & Interests Section -->
+    <section id="skills-interests">
+        <h2><i class="fas fa-wrench"></i> Skills</h2>
+        <ul>
+            <li><a href="https://www.guvi.in/courses/web-development/html-and-css/?utm_source=Placement-Preparation-Blog&utm_medium=cross_promotion&utm_campaign=best_websites_to_learn_html_and_css&utm_content=visit_now" class="skill-link" target="_blank"><i class="fab fa-html5"></i> HTML & CSS</a></li>
+            <li><a href="https://www.freecodecamp.org/" class="skill-link" target="_blank"><i class="fab fa-js-square"></i> JavaScript</a></li>
+            <li><a href="https://coursesity.com/blog/best-responsive-web-design-courses/#1-responsive-web-design-essentialshtml5-css3-bootstrap" class="skill-link" target="_blank"><i class="fas fa-mobile-alt"></i> Responsive Web Design</a></li>
+            <li><a href="https://www.placementpreparation.io/blog/best-websites-to-learn-sql/" class="skill-link" target="_blank"><i class="fas fa-database"></i> Basic SQL</a></li>
+            <li><a href="https://www.mygreatlearning.com/academy/learn-for-free/courses/ui-ux" class="skill-link" target="_blank"><i class="fas fa-bezier-curve"></i> UI/UX Principles</a></li>
+        </ul>
+
+        <h2><i class="fas fa-star"></i> Interests</h2>
+        <ol>
+            <li><a href="https://htmlburger.com/blog/best-ui-websites/" class="interest-link" target="_blank"><i class="fas fa-palette"></i> UI/UX Design</a></li>
+            <li><a href="https://inkbotdesign.com/graphic-design-ethics/" class="interest-link" target="_blank"><i class="fas fa-paint-brush"></i> Graphic Design</a></li>
+            <li><a href="https://in.ign.com/" class="interest-link" target="_blank"><i class="fas fa-gamepad"></i> Gaming</a></li>
+            <li><a href="https://techcrunch.com/" target="_blank"><i class="fas fa-newspaper"></i> Tech News</a></li>
+        </ol>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2><i class="fas fa-folder-open"></i> Projects</h2>
+        <a href="https://github.com/AsuRanjan/Assignment-1-VaultofCodes.git" target="_blank" class="project-card-link">
+            <div class="project">
+                <h3><i class="fas fa-globe"></i> My Portfolio Website</h3>
+                <p>A personal website that showcases my work and skills using HTML and CSS. This project demonstrates my foundational web development abilities.</p>
+            </div>
+        </a>
+        <a href="javascript:void(0);" target="_blank" class="project-card-link">
+            <div class="project">
+                <h3><i class="fas fa-clipboard-list"></i> To-Do List</h3>
+                <p>A basic application designed to help users manage their daily tasks efficiently. Built with vanilla JavaScript for interactive functionality.</p>
+                <small>[Updating soon]</small>
+            </div>
+        </a>
+        <a href="https://colab.research.google.com/drive/1RdMNbVOiFffjsGECDdQpipiIQl9UTn9x1?usp=drive_link" target="_blank" class="project-card-link">
+            <div class="project">
+                <h3><i class="fas fa-cloud-sun"></i> Weather Dashboard</h3>
+                <p>A dynamic dashboard that fetches and displays real-time weather data using a public API, providing current conditions and forecasts.</p>
+            </div>
+        </a>
+        <a href="https://rawcdn.githack.com/AsuRanjan/Assignment-3-VaultofCodes/a101a1373464610883ab2bbc3b31a086dbde0f8d/intenship%20web.html" target="_blank" class="project-card-link">
+            <div class="project">
+                <h3><i class="fas fa-briefcase"></i> Internship</h3>
+                <p>Gained valuable professional experience in a dynamic work environment, contributing to various projects and developing new skills.</p>
+                <small>Company: VaultofCodes | Summer 2025</small>
+            </div>
+        </a>
+    </section>
+
+    <!-- User Registration Form Section -->
+    <section id="registration-form">
+        <h2><i class="fas fa-user-plus"></i> User Registration Form</h2>
+        <form onsubmit="return validateForm(event)">
+            <label for="firstName"><i class="fas fa-user"></i> First Name:</label>
+            <input type="text" id="firstName" required>
+
+            <label for="lastName"><i class="fas fa-user"></i> Last Name:</label>
+            <input type="text" id="lastName" required>
+
+            <label for="email"><i class="fas fa-envelope"></i> Email Address: <span class="tooltip">(e.g. yourname@email.com)</span></label>
+            <input type="email" id="email" required>
+
+            <label for="password"><i class="fas fa-lock"></i> Password: <span class="tooltip">(min 6 chars with letters and numbers)</span></label>
+            <div class="password-input-container">
+                <input type="password" id="password" oninput="checkStrength(this.value)" required>
+                <i class="fas fa-eye toggle-password-visibility" id="togglePassword"></i>
+            </div>
+
+            <label for="confirm"><i class="fas fa-lock"></i> Confirm Password:</label>
+            <div class="password-input-container">
+                <input type="password" id="confirm" oninput="checkPasswordMatch()" required>
+                <i class="fas fa-eye toggle-password-visibility" id="toggleConfirmPassword"></i>
+            </div>
+            <div id="passwordMatchStatus" class="password-match-status"></div>
+
+
+            <div id="strengthBarContainer">
+                <div id="strengthFill" class="strength"></div>
+            </div>
+
+            <label for="dob"><i class="fas fa-calendar-alt"></i> Date of Birth:</label>
+            <input type="date" id="dob" required>
+
+            <label><i class="fas fa-venus-mars"></i> Gender:</label>
+            <div class="gender-options">
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+                <label><input type="radio" name="gender" value="other"> Other</label>
+            </div>
+
+            <label for="profilePicture"><i class="fas fa-image"></i> Profile Picture:</label>
+            <div class="file-input-wrapper">
+                <input type="file" id="profilePicture" accept="image/*">
+                <label for="profilePicture" class="custom-file-input-button">
+                    <i class="fas fa-upload"></i> Choose File
+                </label>
+                <div class="profile-preview-controls">
+                    <img id="profilePicturePreview" class="profile-picture-preview" src="#" alt="Profile Preview">
+                    <button type="button" id="removeProfilePictureBtn" class="remove-file-button">
+                        <i class="fas fa-trash-alt"></i> Remove Photo
+                    </button>
+                </div>
+            </div>
+
+            <div class="checkbox">
+                <input type="checkbox" id="terms" required>
+                <label for="terms"> I agree to Terms & Conditions</label>
+            </div>
+
+            <button type="submit"><i class="fas fa-paper-plane"></i> Register</button>
+        </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2><i class="fas fa-address-book"></i> Contact</h2>
+        <div class="contact-info">
+            <!-- Removed the email address line -->
+            <p>
+                <a href="https://linkedin.com/in/ashutosh-ranjan-83989b259" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+                <a href="https://github.com/AsuRanjan" target="_blank"><i class="fab fa-github-square"></i> GitHub</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>&copy; 2025 Ashutosh Ranjan. All rights reserved.</footer>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Custom Modal for Alerts -->
+    <div id="customAlertModal" class="custom-modal">
+        <div class="custom-modal-content">
+            <h3 id="modalTitle"></h3>
+            <p id="modalMessage"></p>
+            <button onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
+
+    <!-- Enlarged Image Preview Modal -->
+    <div id="enlargedPreviewModal" class="enlarged-preview-modal">
+        <img id="enlargedPreviewContent" class="enlarged-preview-content" src="#" alt="Enlarged Profile Preview">
+    </div>
+
+    <script>
+        // Function to show custom alert modal
+        function showCustomAlert(title, message) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('customAlertModal').style.display = 'flex';
+        }
+
+        // Function to close custom alert modal
+        function closeCustomAlert() {
+            document.getElementById('customAlertModal').style.display = 'none';
+        }
+
+        // Store the original Font Awesome icon element for the "About Me" section
+        let originalAboutMeIconElement;
+
+        // DOM Content Loaded: Initialize dark mode and observe sections
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark mode initialization
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.toggle-mode i').classList.replace('fa-moon', 'fa-sun');
+            }
+
+            // Intersection Observer for section animations
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger when 15% of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Scroll to top button visibility
+            window.onscroll = function() { scrollFunction() };
+
+            // Get a reference to the aboutMeIcon element and store its original state
+            const aboutMeIconContainer = document.getElementById('aboutMeIcon');
+            if (aboutMeIconContainer) {
+                originalAboutMeIconElement = aboutMeIconContainer.cloneNode(true);
+            }
+
+            // Profile Picture Preview Logic
+            const profilePictureInput = document.getElementById('profilePicture');
+            const profilePicturePreview = document.getElementById('profilePicturePreview');
+            const removeProfilePictureBtn = document.getElementById('removeProfilePictureBtn'); // Get the new button
+            const enlargedPreviewModal = document.getElementById('enlargedPreviewModal');
+            const enlargedPreviewContent = document.getElementById('enlargedPreviewContent');
+
+            profilePictureInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                const currentAboutMeIcon = document.getElementById('aboutMeIcon'); // Get current reference
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePicturePreview.src = e.target.result;
+                        profilePicturePreview.style.display = 'block'; // Show the preview
+                        removeProfilePictureBtn.style.display = 'flex'; // Show the remove button (using flex for centering icon)
+
+                        // Create image element for About Me icon
+                        const imgElement = document.createElement('img');
+                        imgElement.id = 'aboutMeIcon'; // Apply the ID so CSS styles apply
+                        imgElement.src = e.target.result;
+                        imgElement.alt = "Profile Picture";
+                        // Styles for width, height, borderRadius, objectFit, verticalAlign are now handled by CSS #aboutMeIcon rule
+
+                        // Replace the current icon/image with the new image
+                        if (currentAboutMeIcon && currentAboutMeIcon.parentNode) {
+                            currentAboutMeIcon.parentNode.replaceChild(imgElement, currentAboutMeIcon);
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // If no file is selected (e.g., user cancels file dialog)
+                    profilePicturePreview.src = '#';
+                    profilePicturePreview.style.display = 'none'; // Hide if no file selected
+                    removeProfilePictureBtn.style.display = 'none'; // Hide the remove button
+
+                    // Revert to original Font Awesome icon if no file is selected
+                    if (currentAboutMeIcon && currentAboutMeIcon.tagName.toLowerCase() === 'img' && originalAboutMeIconElement) {
+                        const newIconElement = originalAboutMeIconElement.cloneNode(true);
+                        newIconElement.id = 'aboutMeIcon'; // Ensure it retains the ID
+                        currentAboutMeIcon.parentNode.replaceChild(newIconElement, currentAboutMeIcon);
+                    }
+                }
+            });
+
+            // "Remove File" button functionality
+            removeProfilePictureBtn.addEventListener('click', function() {
+                profilePictureInput.value = ''; // Clear the file input
+                profilePicturePreview.src = '#'; // Clear the image preview src
+                profilePicturePreview.style.display = 'none'; // Hide the image preview
+                removeProfilePictureBtn.style.display = 'none'; // Hide the remove button itself
+
+                // Revert the About Me icon to its original state
+                const currentAboutMeIcon = document.getElementById('aboutMeIcon');
+                if (currentAboutMeIcon && currentAboutMeIcon.tagName.toLowerCase() === 'img' && originalAboutMeIconElement) {
+                    const newIconElement = originalAboutMeIconElement.cloneNode(true);
+                    newIconElement.id = 'aboutMeIcon'; // Ensure it retains the ID
+                    currentAboutMeIcon.parentNode.replaceChild(newIconElement, currentAboutMeIcon);
+                }
+            });
+
+
+            profilePicturePreview.addEventListener('click', function() {
+                if (profilePicturePreview.src && profilePicturePreview.src !== window.location.href + '#') {
+                    enlargedPreviewContent.src = profilePicturePreview.src;
+                    // Ensure the modal is displayed before applying the active class for transition
+                    enlargedPreviewModal.style.display = 'flex';
+                    // Use requestAnimationFrame to ensure the display change is rendered before opacity transition
+                    requestAnimationFrame(() => {
+                        enlargedPreviewModal.classList.add('active');
+                    });
+                }
+            });
+
+            enlargedPreviewModal.addEventListener('click', function() {
+                enlargedPreviewModal.classList.remove('active'); // Start opacity fade-out
+                // Set display to none only after the transition completes
+                enlargedPreviewModal.addEventListener('transitionend', function handler() {
+                    // Check if the 'active' class is no longer present, indicating the modal is truly closing
+                    if (!enlargedPreviewModal.classList.contains('active')) {
+                        enlargedPreviewModal.style.display = 'none';
+                        // Remove the event listener to prevent it from firing on subsequent transitions
+                        enlargedPreviewModal.removeEventListener('transitionend', handler);
+                    }
+                });
+            });
+
+            // Password visibility toggle logic
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordField = document.getElementById('password');
+
+            if (togglePassword && passwordField) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordField.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const confirmPasswordField = document.getElementById('confirm');
+
+            if (toggleConfirmPassword && confirmPasswordField) {
+                toggleConfirmPassword.addEventListener('click', function() {
+                    const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    confirmPasswordField.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+
+            // Navigation menu toggle logic
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('nav ul');
+            const navItems = document.querySelectorAll('nav ul li a'); // Select all navigation links
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('nav-open');
+                });
+
+                // Add event listener to each navigation item
+                navItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // Check if the navigation menu is currently open (for small screens)
+                        // This implies that the menuToggle is displayed (which is handled by CSS media queries)
+                        // We check window.innerWidth to ensure this only applies to small screens
+                        if (navLinks.classList.contains('nav-open') && window.innerWidth <= 768) {
+                            setTimeout(() => {
+                                navLinks.classList.remove('nav-open');
+                            }, 500); // Collapse after 0.5 seconds
+                        }
+                    });
+                });
+            }
+
+            // Close navigation menu if screen size changes from small to large
+            window.addEventListener('resize', () => {
+                const navLinks = document.querySelector('nav ul');
+                // Assuming 768px is the breakpoint for mobile navigation
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('nav-open');
+                }
+            });
+        });
+
+        // Toggle Dark/Light Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.toggle-mode i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        }
+
+        // Password Strength Checker
+        function checkStrength(password) {
+            const fillBar = document.getElementById("strengthFill"); // Target the inner fill div
+            let strength = 0;
+
+            if (password.length > 0) {
+                if (password.length >= 6) {
+                    strength += 1;
+                }
+                if (password.match(/[A-Za-z]/)) {
+                    strength += 1;
+                }
+                if (password.match(/[0-9]/)) {
+                    strength += 1;
+                }
+                if (password.match(/[^A-Za-z0-9]/)) { // Special characters
+                    strength += 1;
+                }
+            }
+
+            // Remove all strength classes first to reset the bar's appearance
+            fillBar.classList.remove("weak", "medium", "strong");
+
+            // Explicitly set the width based on strength and apply color class
+            if (strength === 0) {
+                fillBar.style.width = '0%';
+            } else if (strength === 1) {
+                fillBar.style.width = '25%';
+                fillBar.classList.add("weak");
+            } else if (strength === 2) {
+                fillBar.style.width = '50%';
+                fillBar.classList.add("medium");
+            } else if (strength === 3) {
+                fillBar.style.width = '75%';
+                fillBar.classList.add("medium");
+            } else if (strength === 4) {
+                fillBar.style.width = '100%';
+                fillBar.classList.add("strong");
+            }
+        }
+
+        // Password Match Checker
+        function checkPasswordMatch() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm").value;
+            const passwordMatchStatus = document.getElementById("passwordMatchStatus");
+
+            // Clear previous status
+            passwordMatchStatus.textContent = '';
+            passwordMatchStatus.classList.remove('match', 'no-match');
+
+            if (confirmPassword.length > 0) { // Only show status if user has started typing in confirm field
+                if (password === confirmPassword) {
+                    passwordMatchStatus.textContent = 'Passwords match!';
+                    passwordMatchStatus.classList.add('match');
+                } else {
+                    passwordMatchStatus.textContent = 'Passwords do not match.';
+                    passwordMatchStatus.classList.add('no-match');
+                }
+            }
+        }
+
+        // Form Validation
+        function validateForm(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const pass = document.getElementById("password").value;
+            const confirmPass = document.getElementById("confirm").value;
+            const email = document.getElementById("email").value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                showCustomAlert("Validation Error", "Please enter a valid email address (e.g., yourname@email.com).");
+                document.getElementById("email").focus();
+                return false;
+            }
+            if (pass.length < 6) {
+                showCustomAlert("Validation Error", "Password must be at least 6 characters long.");
+                document.getElementById("password").focus();
+                return false;
+            }
+            if (!(pass.match(/[A-Za-z]/) && pass.match(/[0-9]/))) {
+                showCustomAlert("Validation Error", "Password must contain both letters and numbers.");
+                document.getElementById("password").focus();
+                return false;
+            }
+            if (pass !== confirmPass) {
+                showCustomAlert("Validation Error", "Passwords do not match. Please re-enter.");
+                document.getElementById("confirm").focus();
+                return false;
+            }
+
+            // Check if at least one gender radio button is selected
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            let genderSelected = false;
+            for (const radio of genderRadios) {
+                if (radio.checked) {
+                    genderSelected = true;
+                    break;
+                }
+            }
+            if (!genderSelected) {
+                showCustomAlert("Validation Error", "Please select your gender.");
+                return false;
+            }
+
+            // If all validations pass
+            showCustomAlert("Success!", "Registration Successful! Thank you for registering.");
+            // Here you would typically send form data to a server
+            // event.target.submit(); // Uncomment to allow actual form submission
+            return true;
+        }
+
+        // Scroll to Top Button Logic
+        function scrollFunction() {
+            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll animation
+            });
+        }
+    </script>
+</body>
+</html>
